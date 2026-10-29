@@ -390,6 +390,50 @@
 
 
 <!-- ============================================================
+     VIP LIST (Growth Engine: saves to the TegoKgatso sheet)
+============================================================ -->
+
+<section id="vip" class="bg-leather-800 border-t border-leather-700 py-14 sm:py-20 text-leather-100">
+    <div class="max-w-xl mx-auto px-4 sm:px-6 text-center">
+        <p class="text-amber-gold font-semibold tracking-[0.2em] text-[10px] sm:text-xs uppercase mb-2">TegoKgatso VIP List</p>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-leather-50 mb-3 leading-tight">Be First To See New Bags</h2>
+        <p class="text-leather-200 text-xs sm:text-sm font-light mb-8">
+            Join our VIP list and we'll WhatsApp you when new pieces arrive, or tell us which bag you're looking for and we'll help you choose.
+        </p>
+        <form data-growth-form data-whatsapp="27658693811"
+              data-thanks="Welcome to the TegoKgatso VIP list! We'll be in touch on WhatsApp soon."
+              class="grid gap-3 text-left">
+            <input name="name" required autocomplete="name" placeholder="Your name"
+                   class="w-full bg-leather-900 border border-leather-700 text-leather-50 placeholder-leather-300 px-4 py-3 rounded-sm text-sm focus:outline-none focus:border-amber-gold">
+            <input name="phone" type="tel" required autocomplete="tel" placeholder="WhatsApp number"
+                   class="w-full bg-leather-900 border border-leather-700 text-leather-50 placeholder-leather-300 px-4 py-3 rounded-sm text-sm focus:outline-none focus:border-amber-gold">
+            <input name="email" type="email" autocomplete="email" placeholder="Email (optional)"
+                   class="w-full bg-leather-900 border border-leather-700 text-leather-50 placeholder-leather-300 px-4 py-3 rounded-sm text-sm focus:outline-none focus:border-amber-gold">
+            <select name="service"
+                    class="w-full bg-leather-900 border border-leather-700 text-leather-50 px-4 py-3 rounded-sm text-sm focus:outline-none focus:border-amber-gold">
+                <option value="New collection updates">Just send me new arrivals</option>
+                <option>Backpack</option>
+                <option>Briefcase / laptop bag</option>
+                <option>Duffel / travel bag</option>
+                <option>Gift for someone</option>
+                <option>Corporate or bulk order</option>
+            </select>
+            <button type="submit"
+                    class="w-full bg-amber-gold text-leather-900 px-4 py-3 rounded-sm font-bold text-xs uppercase tracking-wider hover:bg-yellow-500 transition">
+                Join The VIP List
+            </button>
+            <p class="text-[10px] text-leather-300 text-center">We only use your details to contact you about TegoKgatso bags.</p>
+        </form>
+    </div>
+</section>
+
+<style>
+    #vip .gf-thanks { background:#2C1A09; border:1px solid #D4AF37; color:#FAF6F0; padding:20px; border-radius:2px; text-align:center; font-size:14px; line-height:1.9; }
+    #vip .gf-wa { display:inline-block; margin-top:10px; background:#25D366; color:#fff; padding:10px 18px; border-radius:2px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.08em; text-decoration:none; }
+</style>
+
+
+<!-- ============================================================
      FOOTER
 ============================================================ -->
 
@@ -415,6 +459,7 @@
             <ul class="space-y-2 text-xs">
                 <li><a href="#featured" class="hover:text-amber-gold">Shop All Collection</a></li>
                 <li><a href="#about" class="hover:text-amber-gold">Our Artisanship</a></li>
+                <li><a href="#vip" class="hover:text-amber-gold">Join The VIP List</a></li>
             </ul>
         </div>
 
@@ -2059,6 +2104,9 @@ document.getElementById("checkout-form").addEventListener("submit", async (e) =>
 
         document.getElementById("order-notes").value = "";
 
+        // Growth Engine: count this WhatsApp order in the TegoKgatso sheet
+        if (window.growthEngine) window.growthEngine.track("whatsapp_order", { detail: orderId });
+
         const successModal = document.getElementById("success-modal");
         successModal.classList.remove("hidden");
         successModal.classList.add("flex");
@@ -2594,6 +2642,9 @@ try {
 }
 
 </script>
+
+<!-- Growth Engine tracker: replace the link with TegoKgatso's own Web app URL (ends in /exec) -->
+<script src="growth.js" data-endpoint="https://script.google.com/macros/s/AKfycbykOlY8B41PLvmWq_ktFEIQMKSaFKK5pzlfsreatgNylFwu4es013gsOJMtM13Wu-Ko/exec" defer></script>
 
 </body>
 </html>
